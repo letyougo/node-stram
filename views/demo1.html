@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <link rel="stylesheet" href="/static/webuploader.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<form id="form"  enctype="multipart/form-data" method="post">
+    小文件（夹）
+    <input id="upload"  type="file" name="files[]" webkitdirectory multiple />
+    <input name="age" value="20">
+    <input type="button" value="upload" id="submit">
+</form>
+
+
+
+
+
+</body>
+<script
+        src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+
+</script>
+<script>
+
+
+    $("#submit").click(function (e) {
+        var data = new FormData(document.getElementById('form'))
+        console.log(data)
+
+        $.ajax({
+            method:'POST',
+            data:data,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,
+            url:'http://localhost:3000/upload',
+            success:function (res) {
+                console.log(res)
+            }
+        })
+    })
+
+</script>
+
+</html>

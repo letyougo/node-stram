@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+
+    <style>
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        body,html,div{
+            margin: 0;
+            padding: 0;
+        }
+        #left-panel{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        #terminal{
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            color: #ffffff;
+        }
+
+
+
+        textarea:focus{
+            border: none;
+            outline: none;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div id="left-panel"></div>
+
+<textarea id="terminal" ></textarea>
+
+
+
+
+
+</body>
+<script src="/static/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/stream.js"></script>
+<script src="/static/dom.js"></script>
+<script>
+
+    var socket = io.connect('/xiaoxiaosu')
+
+    var stream = ss.createStream();
+    ss(socket).emit('new',stream)
+
+    $("#terminal").on('keydown',function () {
+        return false
+    })
+
+    new DomInput(document.getElementById('left-panel'),stream)
+
+    stream.on('data',function (data) {
+        data = $("#terminal").val()+data
+        $('#terminal').val(data)
+
+    })
+
+
+
+
+</script>
+
+</html>

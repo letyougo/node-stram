@@ -1,0 +1,6 @@
+{
+    "name": "aaa",
+    "port": 3000,
+    "staticRoot": "static",
+    "staticDir": "static"
+}
